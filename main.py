@@ -16,6 +16,8 @@ def generate_segment(x1, y1):
                          Point(x2 - offset, y2 - offset))
         rect.setFill('white')
         yield rect
+    yield Line(Point(x1, y1), Point(x2, y2))
+    yield Line(Point(x1, y2), Point(x2, y1))
 
 
 def generate_row(row_idx):
@@ -24,8 +26,8 @@ def generate_row(row_idx):
     for i in range(SEGMENTS_PER_ROW):
         x_offset = i * SEGMENT_WIDTH / 2
         segment = []
-        for square in generate_segment(START_X + x_offset, START_Y + y_offset):
-            segment.append(square)
+        for element in generate_segment(START_X + x_offset, START_Y + y_offset):
+            segment.append(element)
         row.append(segment)
     return row
 
