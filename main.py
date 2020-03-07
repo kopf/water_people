@@ -15,6 +15,8 @@ def generate_segment(x1, y1):
         rect = Rectangle(Point(x1 + offset, y1 + offset),
                          Point(x2 - offset, y2 - offset))
         rect.setFill('white')
+        if level > 3:
+            rect.setWidth(2)
         yield rect
     yield Line(Point(x1, y1), Point(x2, y2))
     yield Line(Point(x1, y2), Point(x2, y1))
