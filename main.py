@@ -36,7 +36,7 @@ def generate_row(row_idx):
 
 
 def generate_crosshairs():
-    midway = ((SEGMENT_WIDTH / 2) * (SEGMENTS_PER_ROW / 2)) + (SEGMENT_WIDTH / 4)
+    midway = ((SEGMENT_WIDTH / 2) * (SEGMENTS_PER_ROW / 2 + 1))
     yield Line(Point(START_X + midway, START_Y), Point(START_X + midway, START_Y + (midway * 2)))
     yield Line(Point(START_X, START_Y + midway), Point(START_X + (midway * 2), START_Y + midway))
 
