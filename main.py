@@ -18,12 +18,13 @@ def generate_segment(x1, y1):
         yield rect
 
 
-def generate_row():
+def generate_row(row_idx):
     line = []
+    y_offset = row_idx * SEGMENT_WIDTH / 2
     for i in range(SEGMENTS_PER_ROW):
-        offset = i * SEGMENT_WIDTH / 2
+        x_offset = i * SEGMENT_WIDTH / 2
         segment = []
-        for square in generate_segment(START_X + offset, START_Y):
+        for square in generate_segment(START_X + x_offset, START_Y + y_offset):
             segment.append(square)
         line.append(segment)
     return line
@@ -42,11 +43,12 @@ def alternating_iterator(iterable, last_first=True):
 
 def main():
     win = GraphWin("Water People", 1140, 800)
-    row = generate_row()
-    for segment in alternating_iterator(row):
-        for square in segment:
-            if not square.canvas:
-                square.draw(win)
+    for row_idx in alternating_iterator(list(range(ROW_COUNT))):
+        row = generate_row(row_idx)
+        for segment in alternating_iterator(row):
+            for square in segment:
+                if not square.canvas:
+                    square.draw(win)
     win.getMouse() # Pause to view result
     win.close()    # Close window when done
 
