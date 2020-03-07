@@ -1,7 +1,7 @@
 from graphics import *
 
 SEGMENT_SQUARE_COUNT = 8 # number of squares that make up an individual segment
-SPACING = 10 # spacing between squares within a segment
+SPACING = 6 # spacing between squares within a segment
 SEGMENT_WIDTH = SEGMENT_SQUARE_COUNT * SPACING * 2 # width of a segment
 SEGMENTS_PER_ROW = ROW_COUNT = 13
 START_X = START_Y = SPACING
