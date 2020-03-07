@@ -29,14 +29,24 @@ def generate_row():
     return line
 
 
+def alternating_iterator(iterable, last_first=True):
+    exhausted = False
+    indexes = (-1, 0) if last_first else (0, -1)
+    while not exhausted:
+        try:
+            for idx in indexes:
+                yield iterable.pop(idx)
+        except IndexError:
+            exhausted = True
+
+
 def main():
     win = GraphWin("Water People", 1140, 800)
-    line = generate_row()
-    for i in range(int(SEGMENTS_PER_ROW / 2) + 1):
-        for segment in (line[-i], line[i]):
-            for square in segment:
-                if not square.canvas:
-                    square.draw(win)
+    row = generate_row()
+    for segment in alternating_iterator(row):
+        for square in segment:
+            if not square.canvas:
+                square.draw(win)
     win.getMouse() # Pause to view result
     win.close()    # Close window when done
 
