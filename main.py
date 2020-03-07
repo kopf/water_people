@@ -19,15 +19,15 @@ def generate_segment(x1, y1):
 
 
 def generate_row(row_idx):
-    line = []
+    row = []
     y_offset = row_idx * SEGMENT_WIDTH / 2
     for i in range(SEGMENTS_PER_ROW):
         x_offset = i * SEGMENT_WIDTH / 2
         segment = []
         for square in generate_segment(START_X + x_offset, START_Y + y_offset):
             segment.append(square)
-        line.append(segment)
-    return line
+        row.append(segment)
+    return row
 
 
 def alternating_iterator(iterable, last_first=True):
