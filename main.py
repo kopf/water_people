@@ -32,6 +32,12 @@ def generate_row(row_idx):
     return row
 
 
+def generate_crosshairs():
+    midway = ((SEGMENT_WIDTH / 2) * (SEGMENTS_PER_ROW / 2)) + (SEGMENT_WIDTH / 4)
+    yield Line(Point(START_X + midway, START_Y), Point(START_X + midway, START_Y + (midway * 2)))
+    yield Line(Point(START_X, START_Y + midway), Point(START_X + (midway * 2), START_Y + midway))
+
+
 def alternating_iterator(iterable, last_first=True):
     exhausted = False
     indexes = (-1, 0) if last_first else (0, -1)
@@ -44,15 +50,17 @@ def alternating_iterator(iterable, last_first=True):
 
 
 def main():
-    win = GraphWin("Water People", 1140, 800)
+    win = GraphWin("Water People", 1140, 1140)
     for row_idx in alternating_iterator(list(range(ROW_COUNT))):
         row = generate_row(row_idx)
         for segment in alternating_iterator(row):
             for square in segment:
                 if not square.canvas:
                     square.draw(win)
-    win.getMouse() # Pause to view result
-    win.close()    # Close window when done
+    for line in generate_crosshairs():
+        line.draw(win)
+    win.getMouse() # Pause for click
+    win.close()
 
 
 if __name__ == '__main__':
